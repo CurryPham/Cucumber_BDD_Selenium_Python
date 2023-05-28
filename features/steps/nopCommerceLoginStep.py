@@ -26,9 +26,11 @@ def clickToLoginButton(context):
 
 @then('User must successfully login to the dashboard page')
 def verifyLoginSucces(context):
-    actual = context.driver.title
     expected = "nopCommerce demo store"
+    try:
+        actual = context.driver.title
+    except:
+        context.driver.close()
+        assert False, "Test Failed"
     if actual == expected:
-        assert True
-
-
+        assert True, "Test Passed"
